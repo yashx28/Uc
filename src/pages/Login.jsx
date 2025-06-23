@@ -24,7 +24,7 @@ setRole(res.data.role); // ✅ now this will work
 
   const verifyOtp = async () => {
     try {
-      const res = await axios.post('http://localhost:3001/verify-otp', { email, otp });
+      const res = await axios.post('https://uc-api-st0c.onrender.com/verify-otp', { email, otp });
       const role = res.data.role;
   console.log(role)
       if (role === 'admin') {
