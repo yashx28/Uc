@@ -12,7 +12,7 @@ const Contact = () => {
     e.preventDefault();
     
     try {
-      await axios.post('http://localhost:3001/contact', formData);
+      await axios.post('https://uc-api-st0c.onrender.com/contact', formData);
       alert("Message sent successfully!");
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {

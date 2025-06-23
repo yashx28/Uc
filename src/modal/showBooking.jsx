@@ -6,7 +6,7 @@ const ShowBooking = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/bookings');
+      const res = await axios.get('https://uc-api-st0c.onrender.com/bookings');
       setBookings(res.data);
     } catch (err) {
       console.error('Error fetching bookings:', err);

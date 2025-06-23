@@ -21,7 +21,7 @@ const AddBarberModal = ({ onClose }) => {
         image,
       };
 
-      const res = await axios.post('http://localhost:3001/addbarber', newBarber);
+      const res = await axios.post('https://uc-api-st0c.onrender.com/addbarber', newBarber);
 
       if (res.status === 201) {
         alert('Barber added successfully!');

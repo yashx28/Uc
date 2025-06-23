@@ -7,7 +7,7 @@ const ShowUser = () => {
   // Fetch users
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/users');
+      const res = await axios.get('https://uc-api-st0c.onrender.com/users');
       setUsers(res.data);
     } catch (err) {
       console.error('Error fetching users:', err);
@@ -22,7 +22,7 @@ const ShowUser = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
-        await axios.delete(`http://localhost:3001/delete-user/${id}`);
+        await axios.delete(`https://uc-api-st0c.onrender.com/delete-user/${id}`);
         fetchUsers(); // Refresh user list after deletion
       } catch (err) {
         console.error('Error deleting user:', err);

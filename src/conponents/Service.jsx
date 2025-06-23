@@ -10,7 +10,7 @@ const Service = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/services');
+        const res = await axios.get('https://uc-api-st0c.onrender.com/services');
         setServices(res.data);
       } catch (err) {
         console.error('Error fetching services:', err);
@@ -26,7 +26,7 @@ const Service = () => {
   };
 
   const closeBookingModal = () => {
-    setIsBookingOpen(false);
+    setIsBookingOpen(false); 
     setSelectedService(null);
   };
 

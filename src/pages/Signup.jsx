@@ -14,7 +14,7 @@ const Signup = () => {
   const SubmitEvent = async (e) => {
     e.preventDefault();
       try {
-    const response = await axios.post('http://localhost:3001/signup', {
+    const response = await axios.post('https://uc-api-st0c.onrender.com/signup', {
       name,
       email,
       password,

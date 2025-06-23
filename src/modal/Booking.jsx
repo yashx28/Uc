@@ -20,7 +20,7 @@ const Booking = ({ onClose, service }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   try {
-    const res = await axios.post('http://localhost:3001/bookings', formData);
+    const res = await axios.post('https://uc-api-st0c.onrender.com/bookings', formData);
     alert(res.data.message || 'Booking confirmed!');
     onClose();
   } catch (err) {

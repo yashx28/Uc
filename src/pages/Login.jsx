@@ -11,7 +11,7 @@ const EmailLogin = () => {
 
   const sendOtp = async () => {
     try {
-    const res = await axios.post('http://localhost:3001/send-otp', { email });
+    const res = await axios.post('https://uc-api-st0c.onrender.com/send-otp', { email });
 alert('OTP sent to your email');
 setRole(res.data.role); // ✅ now this will work
 

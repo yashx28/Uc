@@ -21,7 +21,7 @@ const AddServiceModal = ({ onClose }) => {
         image,
       };
 
-      const res = await axios.post('http://localhost:3001/addservice', newService);
+      const res = await axios.post('https://uc-api-st0c.onrender.com/addservice', newService);
 
       if (res.status === 201) {
         alert('Service added successfully!');

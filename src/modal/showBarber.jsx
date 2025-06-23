@@ -6,7 +6,7 @@ const ShowBarber = () => {
 
   const fetchBarbers = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/barbers');
+      const res = await axios.get('https://uc-api-st0c.onrender.com/barbers');
       setBarbers(res.data);
     } catch (err) {
       console.error('Error fetching barbers:', err);
@@ -16,7 +16,7 @@ const ShowBarber = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this barber?')) {
       try {
-        await axios.delete(`http://localhost:3001/delete-barber/${id}`);
+        await axios.delete(`https://uc-api-st0c.onrender.com/delete-barber/${id}`);
         fetchBarbers(); // Refresh after delete
       } catch (err) {
         console.error('Error deleting barber:', err);
