@@ -14,6 +14,7 @@ const AdminDashboard = () => {
     setActiveSection(section);
   };
 
+
   return (
     <div
       className="min-h-screen w-screen bg-cover bg-center flex flex-col lg:flex-row"

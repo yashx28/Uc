@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 const EmailLogin = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
