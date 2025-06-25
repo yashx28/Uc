@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Booking from '../modal/Booking';
-import { FaTimes } from 'react-icons/fa'; // install via `npm install react-icons`
+import { FaTimes } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'; // ✅ for redirection
 
 const Service = () => {
   const [services, setServices] = useState([]);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+
+  const navigate = useNavigate(); // ✅ initialize navigator
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -21,7 +24,16 @@ const Service = () => {
     fetchServices();
   }, []);
 
+  // ✅ Check login before booking
   const handleAddService = (service) => {
+    const user = JSON.parse(localStorage.getItem('user')); // Check user data in localStorage
+
+    if (!user) {
+      alert('Please login first to book a service.');
+      navigate('/login'); // redirect to login page
+      return;
+    }
+
     setSelectedService(service);
     setIsBookingOpen(true);
   };
@@ -45,18 +57,23 @@ const Service = () => {
   };
 
   return (
-    <div id="services" className="min-h-screen w-screen bg-cover bg-center relative"
+    <div
+      id="services"
+      className="min-h-screen w-screen bg-cover bg-center relative"
       style={{
         backgroundImage: `url('https://img.freepik.com/free-photo/modern-background-with-lines_1361-3533.jpg')`,
       }}
     >
-      <div className='p-5 '>
+      <div className='p-5'>
         <h1 className='text-white text-5xl font-bold'>Services</h1>
       </div>
 
       <div className="p-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {services.map((service) => (
-          <div key={service._id} className="bg-transparent relative rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <div
+            key={service._id}
+            className="bg-transparent relative rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
             <button
               onClick={() => handleDeleteService(service._id)}
               className="absolute top-2 right-2 text-red-500 hover:text-red-700 z-10"
