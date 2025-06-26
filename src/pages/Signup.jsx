@@ -6,6 +6,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handle = () => {
@@ -14,6 +15,7 @@ const Signup = () => {
 
   const SubmitEvent = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     try {
       const response = await axios.post('https://uc-api-st0c.onrender.com/signup', {
         name,
@@ -27,17 +29,18 @@ const Signup = () => {
         navigate('/login');
       }
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.message) {
-        alert(error.response.data.message); // e.g. "Already Have account"
+      if (error.response?.data?.message) {
+        alert(error.response.data.message);
       } else {
         alert('Something went wrong');
       }
       console.error(error);
+    } finally {
+      setLoading(false); // Stop loading
+      setEmail('');
+      setPassword('');
+      setName('');
     }
-
-    setEmail('');
-    setPassword('');
-    setName('');
   };
 
   return (
@@ -83,9 +86,14 @@ const Signup = () => {
           />
           <button
             type="submit"
-            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-full mt-2"
+            disabled={loading}
+            className={`w-full text-white py-2 rounded-full mt-2 ${
+              loading
+                ? 'bg-emerald-400 cursor-not-allowed'
+                : 'bg-emerald-600 hover:bg-emerald-700'
+            }`}
           >
-            Sign Up
+            {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
         </form>
 

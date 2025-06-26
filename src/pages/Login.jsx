@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 const EmailLogin = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [step, setStep] = useState(1);
   const [role, setRole] = useState('');
+  const [sendingOtp, setSendingOtp] = useState(false);
+  const [verifyingOtp, setVerifyingOtp] = useState(false);
   const navigate = useNavigate();
 
   const sendOtp = async () => {
+    setSendingOtp(true);
     try {
       const res = await axios.post('https://uc-api-st0c.onrender.com/send-otp', { email });
       alert('OTP sent to your email');
@@ -19,10 +21,13 @@ const EmailLogin = () => {
     } catch (error) {
       alert('Failed to send OTP');
       console.error(error);
+    } finally {
+      setSendingOtp(false);
     }
   };
 
   const verifyOtp = async () => {
+    setVerifyingOtp(true);
     try {
       const res = await axios.post('https://uc-api-st0c.onrender.com/verify-otp', { email, otp });
       const role = res.data.role;
@@ -38,10 +43,11 @@ const EmailLogin = () => {
     } catch (err) {
       alert('OTP verification failed');
       console.error(err);
+    } finally {
+      setVerifyingOtp(false);
+      setEmail('');
+      setOtp('');
     }
-
-    setEmail('');
-    setOtp('');
   };
 
   const handle = () => {
@@ -72,9 +78,14 @@ const EmailLogin = () => {
             />
             <button
               onClick={sendOtp}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-full"
+              disabled={sendingOtp}
+              className={`w-full text-white py-2 rounded-full ${
+                sendingOtp
+                  ? 'bg-emerald-400 cursor-not-allowed'
+                  : 'bg-emerald-600 hover:bg-emerald-700'
+              }`}
             >
-              Send OTP
+              {sendingOtp ? 'Sending OTP...' : 'Send OTP'}
             </button>
           </div>
         ) : (
@@ -89,9 +100,14 @@ const EmailLogin = () => {
             />
             <button
               onClick={verifyOtp}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-full"
+              disabled={verifyingOtp}
+              className={`w-full text-white py-2 rounded-full ${
+                verifyingOtp
+                  ? 'bg-emerald-400 cursor-not-allowed'
+                  : 'bg-emerald-600 hover:bg-emerald-700'
+              }`}
             >
-              Verify OTP
+              {verifyingOtp ? 'Verifying...' : 'Verify OTP'}
             </button>
           </div>
         )}
