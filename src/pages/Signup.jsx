@@ -15,7 +15,7 @@ const Signup = () => {
 
   const SubmitEvent = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
       const response = await axios.post('https://uc-api-st0c.onrender.com/signup', {
         name,
@@ -36,7 +36,7 @@ const Signup = () => {
       }
       console.error(error);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
       setEmail('');
       setPassword('');
       setName('');
@@ -50,7 +50,6 @@ const Signup = () => {
         backgroundImage: `url('https://img.freepik.com/free-photo/client-doing-hair-cut-barber-shop-salon_1303-20710.jpg')`,
       }}
     >
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/70 z-0"></div>
 
       <div className="relative z-10 bg-gray-900 bg-opacity-90 p-8 sm:p-10 rounded-2xl w-full max-w-md border border-emerald-600 text-white">
@@ -84,15 +83,19 @@ const Signup = () => {
             placeholder="Enter Your Password"
             required
           />
+
           <button
             type="submit"
             disabled={loading}
-            className={`w-full text-white py-2 rounded-full mt-2 ${
+            className={`w-full flex justify-center items-center gap-2 text-white py-2 rounded-full mt-2 ${
               loading
                 ? 'bg-emerald-400 cursor-not-allowed'
                 : 'bg-emerald-600 hover:bg-emerald-700'
             }`}
           >
+            {loading && (
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            )}
             {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
         </form>

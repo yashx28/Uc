@@ -79,12 +79,15 @@ const EmailLogin = () => {
             <button
               onClick={sendOtp}
               disabled={sendingOtp}
-              className={`w-full text-white py-2 rounded-full ${
+              className={`w-full flex items-center justify-center gap-2 text-white py-2 rounded-full ${
                 sendingOtp
                   ? 'bg-emerald-400 cursor-not-allowed'
                   : 'bg-emerald-600 hover:bg-emerald-700'
               }`}
             >
+              {sendingOtp && (
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              )}
               {sendingOtp ? 'Sending OTP...' : 'Send OTP'}
             </button>
           </div>
@@ -101,12 +104,15 @@ const EmailLogin = () => {
             <button
               onClick={verifyOtp}
               disabled={verifyingOtp}
-              className={`w-full text-white py-2 rounded-full ${
+              className={`w-full flex items-center justify-center gap-2 text-white py-2 rounded-full ${
                 verifyingOtp
                   ? 'bg-emerald-400 cursor-not-allowed'
                   : 'bg-emerald-600 hover:bg-emerald-700'
               }`}
             >
+              {verifyingOtp && (
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              )}
               {verifyingOtp ? 'Verifying...' : 'Verify OTP'}
             </button>
           </div>
